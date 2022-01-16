@@ -10,11 +10,11 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve-demo": "npx live-server --no-browser demo",
+    "serve-demo": "npx live-server --no-browser docs",
     "build-wc": "yarn build-checkout && yarn build-products-grid && yarn build-shell",
-    "build-checkout": "ng build checkout --configuration production --aot --build-optimizer && cat dist/checkout/runtime.js dist/checkout/polyfills.js dist/checkout/main.js > demo/js/checkout-wc.js",
-    "build-products-grid": "ng build products-grid --configuration production --aot --build-optimizer && cat dist/products-grid/runtime.js dist/products-grid/polyfills.js dist/products-grid/main.js > demo/js/products-grid-wc.js",
-    "build-shell": "ng build shell --configuration production --aot --build-optimizer && cat dist/shell/runtime.js dist/shell/polyfills.js dist/shell/main.js > demo/js/shell-wc.js"
+    "build-checkout": "ng build checkout --configuration production --aot --build-optimizer && cat dist/checkout/runtime.js dist/checkout/polyfills.js dist/checkout/main.js > docs/js/checkout-wc.js",
+    "build-products-grid": "ng build products-grid --configuration production --aot --build-optimizer && cat dist/products-grid/runtime.js dist/products-grid/polyfills.js dist/products-grid/main.js > docs/js/products-grid-wc.js",
+    "build-shell": "ng build shell --configuration production --aot --build-optimizer && cat dist/shell/runtime.js dist/shell/polyfills.js dist/shell/main.js > docs/js/shell-wc.js"
   },
   "private": true,
   "dependencies": {
