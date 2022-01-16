@@ -1,0 +1,59 @@
+<fd-grid-list>
+  <fd-grid-list-title-bar [title]="'Products'">
+    <span fd-grid-list-title-bar-additional-title-item [innerText]="'(' + _products.length + ')'"></span>
+
+    <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
+
+    <button
+      fd-button
+      fdType="transparent"
+      glyph="sort"
+      aria-label="Sort"
+      aria-labelledby="grid-list-title-bar-dnd-1 grid-list-button-dnd-1"
+      title="Sort"
+      [compact]="true"
+      (click)="showAlert('Sort')"
+    ></button>
+    <button
+      fd-button
+      fdType="transparent"
+      glyph="filter"
+      aria-label="Filter"
+      title="Filter"
+      [compact]="true"
+      (click)="showAlert('Filter')"
+    ></button>
+    <button
+      fd-button
+      fdType="transparent"
+      glyph="group-2"
+      aria-label="Group"
+      title="Group"
+      [compact]="true"
+      (click)="showAlert('Group')"
+    ></button>
+  </fd-grid-list-title-bar>
+
+  <div
+    class="fd-row"
+    style="margin-top: 0"
+  >
+    <fd-grid-list-item
+      *ngFor="let product of _products"
+      [value]="product.id"
+      containerSelector=".fd-grid-list__item"
+    >
+      <fd-grid-list-item-toolbar>{{ product.title }}</fd-grid-list-item-toolbar>
+
+      <div class="fd-grid-list-item-body--container">
+        <fd-avatar image="https://picsum.photos/id/1025/300/200" size="s"></fd-avatar>
+        <div class="fd-grid-list-item-body--content">
+          <p [innerText]="product.description"></p>
+          <button (click)="addToCart(product)" fd-button glyph="cart" fdType="emphasized">Add to cart</button>
+        </div>
+      </div>
+
+      <fd-grid-list-item-footer-bar> Footer Item </fd-grid-list-item-footer-bar>
+    </fd-grid-list-item>
+  </div>
+</fd-grid-list>

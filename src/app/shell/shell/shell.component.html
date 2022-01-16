@@ -1,0 +1,31 @@
+<fd-shellbar>
+  <fd-shellbar-logo>
+    <a href="/" class="fd-shellbar__logo" aria-label="SAP">
+      🚀
+    </a>
+  </fd-shellbar-logo>
+  <fd-shellbar-subtitle>My super store</fd-shellbar-subtitle>
+  <fd-shellbar-actions>
+    <fd-shellbar-action
+      glyph="cart"
+      label="Checkout"
+      [notificationCount]="count"
+      [callback]="callbackFunction"
+    >
+    </fd-shellbar-action>
+  </fd-shellbar-actions>
+</fd-shellbar>
+<fd-dynamic-page size="large" ariaLabel="Example Dynamic Page" [autoResponsive]="false">
+  <fd-dynamic-page-header *ngIf="_breadcrumbs.length > 0">
+    <fd-breadcrumb>
+      <fd-breadcrumb-item *ngFor="let breadcrumb of _breadcrumbs">
+        <a *ngIf="breadcrumb.href" fd-breadcrumb-link href="#">{{ breadcrumb.title }}</a>
+        <span *ngIf="!breadcrumb.href">{{ breadcrumb.title }}</span>
+      </fd-breadcrumb-item>
+    </fd-breadcrumb>
+  </fd-dynamic-page-header>
+  <fd-dynamic-page-content>
+    <slot></slot>
+<!--    <ng-content></ng-content>-->
+  </fd-dynamic-page-content>
+</fd-dynamic-page>

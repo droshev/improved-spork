@@ -1,0 +1,9 @@
+<fdp-wizard-generator
+  *ngIf="stepItems"
+  [items]="stepItems"
+  [responsivePaddings]="false"
+  [appendToWizard]="false"
+  [displaySummaryStep]="true"
+  [contentHeight]="'calc(100vh - 186px)'"
+  (wizardFinished)="wizardFinished($event)"
+></fdp-wizard-generator>

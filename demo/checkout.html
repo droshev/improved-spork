@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles.css">
+  <title>Title</title>
+</head>
+<body>
+<shell-bar>
+  <checkout-page></checkout-page>
+</shell-bar>
+
+<script src="/js/checkout-wc.js"></script>
+<script src="/js/shell-wc.js"></script>
+
+<script>
+
+  const productsInCart = JSON.parse(localStorage.getItem('products'));
+
+  const products = new Array(20).fill({}).map((_, id) => ({
+    id: id.toString(),
+    title: `Product ${id}`,
+    description: `Description ${id}`
+  }));
+
+  const breadcrumbs = [
+    {
+      title: 'Checkout'
+    }
+  ];
+
+  const shell = document.querySelector('shell-bar');
+  const checkout = document.querySelector('checkout-page');
+  shell.breadcrumbs = breadcrumbs;
+  shell.productsInCart = productsInCart;
+  shell.callbackFunction = () => {};
+
+  checkout.availableProducts = products;
+  checkout.selectedProducts = productsInCart;
+</script>
+</body>
+</html>
