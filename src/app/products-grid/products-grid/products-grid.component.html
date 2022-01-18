@@ -46,10 +46,10 @@
       <fd-grid-list-item-toolbar>{{ product.title }}</fd-grid-list-item-toolbar>
 
       <div class="fd-grid-list-item-body--container">
-        <fd-avatar image="https://picsum.photos/id/1025/300/200" size="s"></fd-avatar>
+        <fd-avatar [image]="product.image" size="s"></fd-avatar>
         <div class="fd-grid-list-item-body--content">
           <p [innerText]="product.description"></p>
-          <button (click)="addToCart(product)" fd-button glyph="cart" fdType="emphasized">Add to cart</button>
+          <button (click)="addToCart(product)" fd-button glyph="cart" label="Add to Cart"></button>
         </div>
       </div>
 

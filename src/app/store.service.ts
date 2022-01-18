@@ -5,6 +5,7 @@ export interface ProductItem {
   id: string;
   title: string;
   description: string;
+  image: string;
 }
 
 @Injectable({
@@ -30,7 +31,8 @@ export class StoreService {
     this.products = new Array(20).fill({}).map((_, id) => ({
       id: id.toString(),
       title: `Title ${id}`,
-      description: `Description ${id}`
+      description: `Description ${id}`,
+      image: `https://picsum.photos/id/${id+1025}/300/200`
     }));
 
     this._productsSubject.next(this.products);
