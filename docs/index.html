@@ -4,16 +4,17 @@
   <base href="/">
   <meta charset="UTF-8">
   <link rel="stylesheet" href="styles.css">
-  <base href="/improved-spork/">
+  <link rel="stylesheet" id="customThemeUrl">
+  <link rel="stylesheet" id="themeUrl">
+<!--  <base href="/improved-spork/">-->
   <title>Title</title>
 </head>
 <body>
+  <script src="/js/products-grid-wc.js"></script>
+  <script src="/js/shell-wc.js"></script>
   <shell-bar>
     <products-grid></products-grid>
   </shell-bar>
-
-  <script src="/js/products-grid-wc.js"></script>
-  <script src="/js/shell-wc.js"></script>
 
   <script>
 
@@ -23,7 +24,8 @@
     const products = new Array(20).fill({}).map((_, id) => ({
       id: id.toString(),
       title: `Product ${id}`,
-      description: `Description ${id}`
+      description: `Description ${id}`,
+      image: `https://picsum.photos/id/${id+1025}/300/200`
     }));
 
     const breadcrumbs = [
@@ -42,7 +44,6 @@
 
     addToCart = (product) => {
       productsInCart.push(product);
-      console.log(productsInCart);
       localStorage.setItem('products', JSON.stringify(productsInCart));
       shell.productsInCart = productsInCart;
     };
@@ -56,15 +57,39 @@
       window.location.href = '/checkout.html';
     };
 
+    onThemeChange = (theme) => {
+      const newTheme = {
+        customThemeUrl: theme.customThemeUrl.changingThisBreaksApplicationSecurity,
+        themeUrl: theme.themeUrl.changingThisBreaksApplicationSecurity
+      };
+      setTheme(newTheme);
+    };
+
+    setTheme = (theme) => {
+      if (theme.customThemeUrl.endsWith('/.css')) {
+        return;
+      }
+      document.getElementById('customThemeUrl').setAttribute('href', theme.customThemeUrl);
+      document.getElementById('themeUrl').setAttribute('href', theme.themeUrl);
+      localStorage.setItem('theme', JSON.stringify(theme));
+    };
+
     const shell = document.querySelector('shell-bar');
     const productsGrid = document.querySelector('products-grid');
 
     shell.callbackFunction = callbackFunction;
     shell.breadcrumbs = breadcrumbs;
     shell.productsInCart = productsInCart;
+    shell.themeChange = onThemeChange;
 
     productsGrid.products = products;
     productsGrid.addToCart = addToCart;
+
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme) {
+      setTheme(JSON.parse(savedTheme));
+    }
   </script>
 </body>
 </html>

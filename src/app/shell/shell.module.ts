@@ -1,8 +1,15 @@
 import {DoBootstrap, Injector, NgModule} from '@angular/core';
 import { ShellComponent } from './shell/shell.component';
 import {BrowserModule} from "@angular/platform-browser";
-import {BreadcrumbModule, DynamicPageModule, FundamentalNgxCoreModule, ShellbarModule} from "@fundamental-ngx/core";
+import {
+  BreadcrumbModule,
+  DynamicPageModule,
+  FundamentalNgxCoreModule,
+  ShellbarModule,
+  ThemesService
+} from "@fundamental-ngx/core";
 import {createCustomElement} from "@angular/elements";
+import {RouterModule} from "@angular/router";
 
 
 
@@ -14,9 +21,11 @@ import {createCustomElement} from "@angular/elements";
     BrowserModule,
     BreadcrumbModule,
     DynamicPageModule,
-    ShellbarModule
+    ShellbarModule,
+    RouterModule
   ],
-  exports: [ShellComponent]
+  exports: [ShellComponent],
+  providers: [ThemesService]
 })
 export class ShellModule implements DoBootstrap {
   constructor(private injector: Injector) {

@@ -19,7 +19,6 @@ export class ProductsGridComponent {
 
   @Input()
   set products(value: GridListItem[]) {
-    console.log(value);
     this._products = value;
   };
 

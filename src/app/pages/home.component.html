@@ -1,3 +1,6 @@
-<shell-bar #shell [callbackFunction]="callbackFunction" [breadcrumbs]="breadcrumbs">
+<link rel="stylesheet" *ngIf="cssUrl" [href]="cssUrl"/>
+<link rel="stylesheet" *ngIf="cssCustomUrl" [href]="cssCustomUrl"/>
+
+<shell-bar #shell [callbackFunction]="callbackFunction" [themeChange]="onThemeChange" [breadcrumbs]="breadcrumbs">
   <products-grid [products]="list" [addToCart]="addToCart"></products-grid>
 </shell-bar>

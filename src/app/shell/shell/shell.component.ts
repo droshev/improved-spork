@@ -1,5 +1,7 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, ViewEncapsulation} from '@angular/core';
 import {ProductItem} from "../../store.service";
+import {SafeResourceUrl} from "@angular/platform-browser";
+import {ThemeServiceOutput, ThemesService} from "@fundamental-ngx/core/utils";
 
 export interface Breadcrumb {
   title: string;
@@ -12,7 +14,7 @@ export interface Breadcrumb {
   styleUrls: ['./shell.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom
 })
-export class ShellComponent implements OnInit {
+export class ShellComponent {
 
   @Input()
   set productsInCart(value: ProductItem[]) {
@@ -29,6 +31,14 @@ export class ShellComponent implements OnInit {
   }
 
   @Input()
+  set themeChange(value: (theme: ThemeServiceOutput) => void) {
+    this._themeChange = value;
+    setTimeout(() => {
+      this._themeChange(this.currentTheme);
+    })
+  }
+
+  @Input()
   set breadcrumbs(value: Breadcrumb[]) {
     this._breadcrumbs = value;
   }
@@ -37,9 +47,28 @@ export class ShellComponent implements OnInit {
 
   _breadcrumbs: Breadcrumb[] = [];
 
-  constructor() { }
+  cssUrl?: SafeResourceUrl;
+  cssCustomUrl?: SafeResourceUrl;
+  currentTheme!: ThemeServiceOutput;
 
-  ngOnInit(): void {
+  private _themeChange: (theme: ThemeServiceOutput) => void = (theme: ThemeServiceOutput) => {};
+
+  constructor(private _themesService: ThemesService) {
+    const themeFromUrl = this._themesService.getThemesFromURL('sap-theme');
+
+    if (themeFromUrl) {
+      this.setTheme(themeFromUrl);
+    }
+
+    this._themesService.onThemeQueryParamChange.subscribe((theme) => {
+      this.setTheme(theme);
+    });
   }
 
+  setTheme(theme: ThemeServiceOutput): void {
+    this.currentTheme = theme;
+    if (this.themeChange) {
+      this.themeChange(this.currentTheme);
+    }
+  }
 }

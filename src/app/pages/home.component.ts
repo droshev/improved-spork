@@ -5,6 +5,8 @@ import {takeUntil} from "rxjs/operators";
 import {NgElement} from "@angular/elements";
 import {Breadcrumb, ShellComponent} from "../shell/shell/shell.component";
 import {Router} from "@angular/router";
+import {ThemeServiceOutput} from "@fundamental-ngx/core/utils";
+import {SafeResourceUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-home',
@@ -12,6 +14,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  cssUrl?: SafeResourceUrl;
+  cssCustomUrl?: SafeResourceUrl;
 
   breadcrumbs: Breadcrumb[] = [
     {
@@ -48,6 +53,14 @@ export class HomeComponent implements OnInit {
 
     this._router.navigate(['/checkout']);
   }
+
+  onThemeChange: (theme: ThemeServiceOutput) => void = (theme) => {
+    if (!theme) {
+      return;
+    }
+    this.cssCustomUrl = theme.customThemeUrl;
+    this.cssUrl = theme.themeUrl;
+  };
 
   constructor(private _storeService: StoreService, private _router: Router) {
     this._storeService.products$.pipe(takeUntil(this._onDestroy$)).subscribe((products) => {

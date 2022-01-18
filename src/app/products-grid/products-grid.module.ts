@@ -1,10 +1,15 @@
 import {DoBootstrap, Injector, NgModule} from '@angular/core';
-
-import { ProductsGridComponent } from './products-grid/products-grid.component';
-import {AvatarModule, ButtonModule, FundamentalNgxCoreModule, GridListModule, IconModule} from "@fundamental-ngx/core";
 import {createCustomElement} from "@angular/elements";
 import {BrowserModule} from "@angular/platform-browser";
-import {CommonModule} from "@angular/common";
+
+import {
+  AvatarModule,
+  ButtonModule,
+  GridListModule,
+  IconModule,
+  ThemesService
+} from "@fundamental-ngx/core";
+import { ProductsGridComponent } from './products-grid/products-grid.component';
 
 @NgModule({
     declarations: [

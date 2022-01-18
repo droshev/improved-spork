@@ -6,6 +6,8 @@ import {
 import {Validators} from "@angular/forms";
 import {ProductItem} from "../../store.service";
 import uniq from 'lodash-es/uniq';
+import {SafeResourceUrl} from "@angular/platform-browser";
+import {ThemesService} from "@fundamental-ngx/core/utils";
 
 @Component({
   selector: 'app-checkout',
@@ -46,8 +48,6 @@ export class CheckoutComponent {
 
   private _availableProducts: ProductItem[] = [];
   private _selectedProducts: ProductItem[] = [];
-
-  constructor() {}
 
   wizardFinished(wizardValue: WizardGeneratorFormsValue): void {
     this.wizardValue = wizardValue;

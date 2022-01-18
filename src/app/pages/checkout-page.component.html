@@ -1,3 +1,6 @@
-<shell-bar #shell [breadcrumbs]="breadcrumbs">
+<link rel="stylesheet" *ngIf="cssUrl" [href]="cssUrl"/>
+<link rel="stylesheet" *ngIf="cssCustomUrl" [href]="cssCustomUrl"/>
+
+<shell-bar #shell [breadcrumbs]="breadcrumbs" [themeChange]="onThemeChange">
   <checkout-page #checkout></checkout-page>
 </shell-bar>

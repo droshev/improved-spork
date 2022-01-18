@@ -4,15 +4,16 @@
   <base href="/">
   <meta charset="UTF-8">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" id="customThemeUrl">
+  <link rel="stylesheet" id="themeUrl">
   <title>Title</title>
 </head>
 <body>
+  <script src="/js/checkout-wc.js"></script>
+  <script src="/js/shell-wc.js"></script>
 <shell-bar>
   <checkout-page></checkout-page>
 </shell-bar>
-
-<script src="/js/checkout-wc.js"></script>
-<script src="/js/shell-wc.js"></script>
 
 <script>
 
@@ -30,14 +31,38 @@
     }
   ];
 
+  onThemeChange = (theme) => {
+    const newTheme = {
+      customThemeUrl: theme.customThemeUrl.changingThisBreaksApplicationSecurity,
+      themeUrl: theme.themeUrl.changingThisBreaksApplicationSecurity
+    };
+    setTheme(newTheme);
+  };
+
+  setTheme = (theme) => {
+    if (theme.customThemeUrl.endsWith('/.css')) {
+      return;
+    }
+    document.getElementById('customThemeUrl').setAttribute('href', theme.customThemeUrl);
+    document.getElementById('themeUrl').setAttribute('href', theme.themeUrl);
+    localStorage.setItem('theme', JSON.stringify(theme));
+  };
+
   const shell = document.querySelector('shell-bar');
   const checkout = document.querySelector('checkout-page');
   shell.breadcrumbs = breadcrumbs;
   shell.productsInCart = productsInCart;
   shell.callbackFunction = () => {};
+  shell.themeChange = onThemeChange;
 
   checkout.availableProducts = products;
   checkout.selectedProducts = productsInCart;
+
+  const savedTheme = localStorage.getItem('theme');
+
+  if (savedTheme) {
+    setTheme(JSON.parse(savedTheme));
+  }
 </script>
 </body>
 </html>

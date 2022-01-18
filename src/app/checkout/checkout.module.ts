@@ -3,6 +3,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import {createCustomElement} from "@angular/elements";
 import {BrowserModule} from "@angular/platform-browser";
 import {PlatformWizardGeneratorModule} from "@fundamental-ngx/platform";
+import {ThemesService} from "@fundamental-ngx/core";
 
 @NgModule({
   declarations: [
