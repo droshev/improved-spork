@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {ProductItem} from "../../store.service";
+import { ContentDensity, ContentDensityService } from '@fundamental-ngx/core/utils';
 
 export interface Breadcrumb {
   title: string;
@@ -37,9 +38,11 @@ export class ShellComponent implements OnInit {
 
   _breadcrumbs: Breadcrumb[] = [];
 
-  constructor() { }
+  constructor(private _contentDensityService: ContentDensityService) {}
 
   ngOnInit(): void {
+    this._contentDensityService.contentDensity.next('cozy');
   }
+
 
 }

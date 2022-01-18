@@ -3,6 +3,7 @@ import { ShellComponent } from './shell/shell.component';
 import {BrowserModule} from "@angular/platform-browser";
 import {BreadcrumbModule, DynamicPageModule, FundamentalNgxCoreModule, ShellbarModule} from "@fundamental-ngx/core";
 import {createCustomElement} from "@angular/elements";
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 
 
@@ -15,6 +16,9 @@ import {createCustomElement} from "@angular/elements";
     BreadcrumbModule,
     DynamicPageModule,
     ShellbarModule
+  ],
+  providers:[
+    ContentDensityService
   ],
   exports: [ShellComponent]
 })
